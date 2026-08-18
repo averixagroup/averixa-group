@@ -1,0 +1,128 @@
+# ============================================
+# Averixa Group
+# Global Git Ignore Rules
+# ============================================
+
+# Environment variables / secrets
+.env
+.env.*
+!.env.example
+*.env
+*.secret
+*.secrets
+
+# API keys / credentials
+credentials.json
+secrets.json
+config.local.*
+*.pem
+*.key
+*.p12
+*.pfx
+*.crt
+
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+build/
+develop-eggs/
+dist/
+downloads/
+eggs/
+.eggs/
+lib/
+lib64/
+parts/
+sdist/
+var/
+wheels/
+*.egg-info/
+.installed.cfg
+*.egg
+
+# Python virtual environments
+venv/
+.venv/
+env/
+ENV/
+
+# Python testing / coverage
+.pytest_cache/
+.coverage
+.coverage.*
+htmlcov/
+.tox/
+.nox/
+.mypy_cache/
+.ruff_cache/
+
+# Node.js / JavaScript
+node_modules/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+.npm/
+.yarn/
+.pnpm-store/
+
+# Build output
+.next/
+.nuxt/
+out/
+coverage/
+.cache/
+.parcel-cache/
+.vite/
+
+# IDE / Editors
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+.project
+.settings/
+
+# Operating system files
+.DS_Store
+.DS_Store?
+Thumbs.db
+Desktop.ini
+
+# Logs
+logs/
+*.log
+
+# Temporary files
+tmp/
+temp/
+*.tmp
+*.temp
+*.bak
+
+# Local databases
+*.sqlite
+*.sqlite3
+*.db
+
+# Local configuration
+config.local.json
+config.local.yaml
+config.local.yml
+
+# Docker local overrides
+docker-compose.override.yml
+
+# Terraform
+.terraform/
+*.tfstate
+*.tfstate.*
+.terraform.lock.hcl
+
+# Miscellaneous
+*.pid
+*.pid.lock
