@@ -1,0 +1,78 @@
+name: Security Checks
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  security-checks:
+    name: Repository Security Checks
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Check for sensitive environment files
+        shell: bash
+        run: |
+          echo "Checking repository for sensitive environment files..."
+
+          if find . -type f \
+            \( -name ".env" -o \
+               -name ".env.local" -o \
+               -name ".env.production" -o \
+               -name "*.pem" -o \
+               -name "*.key" \) \
+            -not -path "./.git/*" | grep -q .; then
+
+            echo "Sensitive files detected:"
+            find . -type f \
+              \( -name ".env" -o \
+                 -name ".env.local" -o \
+                 -name ".env.production" -o \
+                 -name "*.pem" -o \
+                 -name "*.key" \) \
+              -not -path "./.git/*"
+
+            exit 1
+          fi
+
+          echo "No prohibited sensitive files detected."
+
+      - name: Verify required repository files
+        shell: bash
+        run: |
+          echo "Checking required repository files..."
+
+          required_files=(
+            "README.md"
+            "SECURITY.md"
+            "LICENSE"
+            ".gitignore"
+            ".env.example"
+            "docs/OVERVIEW.md"
+            "docs/ARCHITECTURE.md"
+            "docs/DEPLOYMENT.md"
+            "docs/DEVELOPMENT.md"
+          )
+
+          for file in "${required_files[@]}"; do
+            if [ ! -f "$file" ]; then
+              echo "Required file missing: $file"
+              exit 1
+            fi
+          done
+
+          echo "All required repository files are present."
+
+      - name: Security checks completed
+        run: echo "Averixa Group repository security checks completed successfully."
